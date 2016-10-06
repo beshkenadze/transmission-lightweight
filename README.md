@@ -22,7 +22,7 @@ filter (can be used with dperson/openvpn).
                 --dns 8.8.4.4 --dns 8.8.8.8 --restart=always \
                 -d dperson/openvpn-client ||
     sudo docker run -it --name bit --net=container:vpn \
-                -d dperson/transmission
+                -d beshkenadze/transmission-lightweight
     sudo docker run -it --name web -p 80:80 -p 443:443 --link vpn:bit \
                 -d dperson/nginx -w "http://bit:9091/transmission;/transmission"
 
@@ -31,21 +31,21 @@ filter (can be used with dperson/openvpn).
 
 ## Hosting a Transmission instance
 
-    sudo docker run -it --name transmission -p 9091:9091 -d dperson/transmission
+    sudo docker run -it --name transmission -p 9091:9091 -d beshkenadze/transmission-lightweight
 
 OR set local storage:
 
     sudo docker run -it --name transmission -p 9091:9091 \
-                -v /path/to/directory:/var/lib/transmission-daemon \
-                -d dperson/transmission
+                -v /path/to/directory:/home/transmission \
+                -d beshkenadze/transmission-lightweight
 
-**NOTE**: The configuration is in `/var/lib/transmission-daemon/info`, downloads
-are in `/var/lib/transmission-daemon/downloads`, and partial downloads are in
-`/var/lib/transmission-daemon/incomplete`.
+**NOTE**: The configuration is in `/home/transmission/info`, downloads
+are in `/home/transmission/downloads`, and partial downloads are in
+`/home/transmission/incomplete`.
 
 ## Configuration
 
-    sudo docker run -it --rm dperson/transmission -h
+    sudo docker run -it --rm beshkenadze/transmission-lightweight -h
 
     Usage: transmission.sh [-opt] [command]
     Options (fields in '[]' are optional, '<>' are required):
@@ -76,16 +76,16 @@ Any of the commands can be run at creation with `docker run` or later with
 
 ### Setting the Timezone
 
-    sudo docker run -it --name transmission -d dperson/transmission -t EST5EDT
+    sudo docker run -it --name transmission -d beshkenadze/transmission-lightweight -t EST5EDT
 
 OR using `environment variables`
 
     sudo docker run -it --name transmission -e TZ=EST5EDT \
-                -d dperson/transmission
+                -d beshkenadze/transmission-lightweight
 
 Will get you the same settings as
 
-    sudo docker run -it --name transmission -p 9091:9091 -d dperson/transmission
+    sudo docker run -it --name transmission -p 9091:9091 -d beshkenadze/transmission-lightweight
     sudo docker exec -it transmission transmission.sh -t EST5EDT \
                 ls -AlF /etc/localtime
     sudo docker restart transmission
@@ -95,4 +95,4 @@ Will get you the same settings as
 ## Issues
 
 If you have any problems with or questions about this image, please contact me
-through a [GitHub issue](https://github.com/dperson/transmission/issues).
+through a [GitHub issue](https://github.com/beshkenadze/transmission-lightweight/issues).
