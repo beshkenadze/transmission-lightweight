@@ -1,3 +1,5 @@
+[![Docker Automated build](https://img.shields.io/docker/automated/behskenadze/transmission-lightweight.svg?maxAge=2592000)](https://hub.docker.com/r/beshkenadze/transmission-lightweight/)
+
 Based on [dperson/transmission](https://github.com/dperson/transmission)
 
 [![logo](https://raw.githubusercontent.com/dperson/transmission/master/logo.png)](https://www.transmissionbt.com/)
